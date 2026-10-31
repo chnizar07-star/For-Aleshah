@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A little something for you.">
+<meta property="og:title" content="Proud of You, Aleshah">
+<meta property="og:description" content="A little something for you.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23d63a63' d='M16 28C4 20 4 9 10.5 7 13.5 6 15.5 8 16 10c.5-2 2.5-4 5.5-3C28 9 28 20 16 28z'/%3E%3C/svg%3E">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Proud of You, Aleshah</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700&display=swap">
+<style>
+/* Layout: one small card. A wide scene on top (Coco on her printer, the plant in its pot), then message, progress dots and one button. */
+:root {
+  --bg: #fff1f4;
+  --surface: #ffffff;
+  --tint: #ffe0e8;
+  --floor: #ffcbd9;
+  --floor-shadow: rgba(58, 38, 56, 0.13);
+  --fg: #3a2638;
+  --muted: #7d6179;
+  --accent: #d63a63;
+  --on-accent: #ffffff;
+  --petal: #ff7a9c;
+  --sun: #ffc24d;
+  --leaf: #4fbf86;
+  --leaf-dark: #37a371;
+  --pot: #ff9d8a;
+  --pot-dark: #f0806c;
+  --face: #3a2638;
+  --cheek: #ff5f86;
+  --line: #f6d3dc;
+  --shadow: rgba(214, 58, 99, 0.16);
+  --c-orange: #e98a3c;
+  --c-black: #3d3236;
+  --c-white: #fffaf4;
+  --c-amber: #f2ab3a;
+  --c-nose: #f48aa0;
+  --c-ear: #f9b2c0;
+  --c-stripe: #b4601f;
+  --c-line: #e3c4b0;
+  --prn: #f5f2f7;
+  --prn-top: #e3dde9;
+  --prn-dark: #9a8fa3;
+  --screen: #3b2f40;
+  --paper: #ffffff;
+  --font-display: "Fredoka", ui-rounded, "Nunito", system-ui, sans-serif;
+  --font-body: "Nunito", ui-rounded, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #231827;
+    --surface: #322338;
+    --tint: #41304a;
+    --floor: #352540;
+    --floor-shadow: rgba(0, 0, 0, 0.28);
+    --fg: #fbe8f0;
+    --muted: #c9aac3;
+    --accent: #ff8fab;
+    --on-accent: #2b1630;
+    --petal: #ff8fab;
+    --sun: #ffd36e;
+    --leaf: #5fd69a;
+    --leaf-dark: #46b783;
+    --pot: #f08f7c;
+    --pot-dark: #d97562;
+    --line: #4a3652;
+    --shadow: rgba(0, 0, 0, 0.35);
+    --c-orange: #f39a4c;
+    --c-black: #5c4b57;
+    --c-white: #fff3e8;
+    --prn: #74617e;
+    --prn-top: #8a7694;
+    --prn-dark: #a995b3;
+    --screen: #241a29;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #231827;
+  --surface: #322338;
+  --tint: #41304a;
+  --floor: #352540;
+  --floor-shadow: rgba(0, 0, 0, 0.28);
+  --fg: #fbe8f0;
+  --muted: #c9aac3;
+  --accent: #ff8fab;
+  --on-accent: #2b1630;
+  --petal: #ff8fab;
+  --sun: #ffd36e;
+  --leaf: #5fd69a;
+  --leaf-dark: #46b783;
+  --pot: #f08f7c;
+  --pot-dark: #d97562;
+  --line: #4a3652;
+  --shadow: rgba(0, 0, 0, 0.35);
+  --c-orange: #f39a4c;
+  --c-black: #5c4b57;
+  --c-white: #fff3e8;
+  --prn: #74617e;
+  --prn-top: #8a7694;
+  --prn-dark: #a995b3;
+  --screen: #241a29;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-block: 24px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 440px; margin: 0 auto; }
+
+.card {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 32px;
+  box-shadow: 0 14px 34px var(--shadow);
+  overflow: hidden;
+}
+
+.scene { position: relative; background: var(--tint); overflow: hidden; }
+#stage { display: block; width: 100%; height: auto; }
+
+/* scene colours */
+.floor { fill: var(--floor); }
+.floor-shadow { fill: var(--floor-shadow); }
+.prn { fill: var(--prn); }
+.prn-top { fill: var(--prn-top); }
+.prn-dark { fill: var(--prn-dark); }
+.screen { fill: var(--screen); }
+.c-orange { fill: var(--c-orange); }
+.c-black { fill: var(--c-black); }
+.c-white { fill: var(--c-white); }
+
+/* Coco */
+.coco { cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; transform-origin: 100px 176px; }
+.coco:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+.tail { transform-origin: 54px 170px; animation: swish 4.5s ease-in-out infinite; }
+.tail path { fill: none; stroke-width: 22; stroke-linecap: round; }
+.tail-o { stroke: var(--c-orange); }
+.tail-b { stroke: var(--c-black); }
+@keyframes swish {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(7deg); }
+}
+.paw-toe { stroke: var(--c-line); stroke-width: 1.8; stroke-linecap: round; fill: none; }
+.ear-shape { stroke-linejoin: round; stroke-width: 5; }
+.ear-l .ear-shape { fill: var(--c-black); stroke: var(--c-black); }
+.ear-r .ear-shape { fill: var(--c-orange); stroke: var(--c-orange); }
+.ear-in { fill: var(--c-ear); }
+.ear-r { transform-origin: 126px 120px; animation: twitch 7s ease-in-out infinite; }
+@keyframes twitch {
+  0%, 90%, 100% { transform: rotate(0deg); }
+  93% { transform: rotate(-11deg); }
+  96% { transform: rotate(4deg); }
+}
+.stripe { stroke: var(--c-stripe); stroke-width: 2.4; stroke-linecap: round; fill: none; }
+.cheek-blush { fill: var(--cheek); opacity: 0.45; }
+.eyes { transform-origin: 100px 148px; animation: blink 5.2s infinite; transition: opacity 0.2s; }
+@keyframes blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.08); }
+}
+.iris { fill: var(--c-amber); stroke: var(--face); stroke-width: 2; }
+.pupil-e { fill: var(--face); }
+.glint { fill: #ffffff; }
+.happy-eyes { opacity: 0; transition: opacity 0.2s; }
+.happy-eyes path { fill: none; stroke: var(--face); stroke-width: 3; stroke-linecap: round; }
+.coco.happy .eyes { opacity: 0; }
+.coco.happy .happy-eyes { opacity: 1; }
+.nose { fill: var(--c-nose); stroke: var(--c-nose); stroke-width: 3; stroke-linejoin: round; }
+.mouth { fill: none; stroke: var(--face); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.whisk { fill: none; stroke: var(--face); stroke-width: 1.4; stroke-linecap: round; opacity: 0.35; }
+.coco.purr .head { animation: purr 0.16s linear infinite; }
+@keyframes purr {
+  0%, 100% { transform: translateX(0.7px); }
+  50% { transform: translateX(-0.7px); }
+}
+.hop { animation: hop 0.5s ease-out; }
+@keyframes hop {
+  0% { transform: translateY(0) scale(1, 1); }
+  30% { transform: translateY(-9px) scale(0.97, 1.04); }
+  60% { transform: translateY(0) scale(1.04, 0.96); }
+  100% { transform: translateY(0) scale(1, 1); }
+}
+
+/* certificate coming out of the printer */
+.paper { transform: translateY(-46px); transition: transform 0.4s ease-in; }
+.paper.out { transform: translateY(0); transition: transform 1.5s cubic-bezier(0.3, 0.7, 0.3, 1) 0.9s; }
+.paper-sheet { fill: var(--paper); stroke: var(--line); stroke-width: 1.5; }
+.paper-line { fill: none; stroke: var(--muted); stroke-width: 2.5; stroke-linecap: round; opacity: 0.5; }
+.seal { fill: var(--sun); }
+.seal-heart { fill: var(--accent); }
+
+/* plant */
+#plantg { transform-origin: 100px 220px; }
+.sway { transform-origin: 100px 174px; animation: sway 5s ease-in-out infinite; }
+@keyframes sway {
+  0%, 100% { transform: rotate(-1.6deg); }
+  50% { transform: rotate(1.6deg); }
+}
+#stem { transition: stroke-dashoffset 0.7s cubic-bezier(0.3, 0.8, 0.3, 1); }
+.stem-line { stroke: var(--leaf-dark); }
+.grow {
+  transform: scale(0);
+  transform-origin: 0 0;
+  transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.grow.on { transform: scale(1); }
+.bloom {
+  transform: scale(0) rotate(-120deg);
+  transform-origin: 0 0;
+  transition: transform 0.9s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.bloom.on { transform: scale(1) rotate(0deg); }
+.leaf { fill: var(--leaf); }
+.vein { stroke: var(--leaf-dark); fill: none; stroke-width: 1.6; stroke-linecap: round; }
+.bud { fill: var(--petal); }
+.petal { fill: var(--petal); }
+.core { fill: var(--sun); }
+.pot-body { fill: var(--pot); }
+.pot-rim { fill: var(--pot-dark); }
+.face { fill: var(--face); }
+.pot-mouth { stroke: var(--face); fill: none; stroke-width: 2; stroke-linecap: round; }
+.pot-cheek { fill: var(--cheek); opacity: 0.55; }
+
+/* speech bubble */
+.bubble {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  min-width: 120px;
+  max-width: 50%;
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 4px 0 var(--shadow);
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  left: 32px;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  background: var(--surface);
+  border-right: 1.5px solid var(--line);
+  border-bottom: 1.5px solid var(--line);
+  transform: rotate(45deg);
+}
+.bubble.pop { animation: pop 0.4s ease-out; }
+
+.spark {
+  position: absolute;
+  color: var(--sun);
+  font-size: 18px;
+  line-height: 1;
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+.s1 { top: 18px; right: 12%; }
+.s2 { top: 96px; left: 52%; font-size: 13px; animation-delay: 1.1s; }
+.s3 { top: 150px; right: 5%; font-size: 12px; animation-delay: 2s; }
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.heart {
+  position: absolute;
+  left: 50%;
+  bottom: 46%;
+  z-index: 3;
+  color: var(--accent);
+  pointer-events: none;
+  animation: rise var(--dur, 1.8s) ease-out forwards;
+}
+@keyframes rise {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.6); }
+  15% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dx, 0), -150px) scale(1.15); }
+}
+
+.body { padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 14px; }
+.eyebrow {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 9vw, 2.6rem);
+  line-height: 1.08;
+  color: var(--accent);
+  text-wrap: balance;
+}
+.msg {
+  min-height: 6.8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+.msg p { margin: 0; }
+.msg-main { font-size: 1.14rem; line-height: 1.5; }
+.msg-sub { font-size: 0.92rem; color: var(--muted); }
+.msg.pop { animation: pop 0.45s ease-out; }
+@keyframes pop {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.progress { display: flex; align-items: center; gap: 12px; }
+.dots { display: flex; gap: 8px; }
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--tint);
+  border: 1.5px solid var(--line);
+  transition: background 0.3s, transform 0.3s;
+}
+.dot.on { background: var(--accent); border-color: var(--accent); transform: scale(1.12); }
+.count {
+  margin-left: auto;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.water {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 6px 0 var(--shadow);
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.water:hover { transform: translateY(-1px); }
+.water:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--shadow); }
+.water:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+.note { margin: 0; text-align: center; font-size: 0.88rem; color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sway, .spark, .tail, .ear-r, .eyes, .hop, .bubble.pop, .msg.pop, .coco.purr .head { animation: none; }
+  #stem, .grow, .bloom, .dot, .paper, .paper.out { transition: none; }
+}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+  <section class="card">
+    <div class="scene" id="scene">
+      <span class="spark s1" aria-hidden="true">✦</span>
+      <span class="spark s2" aria-hidden="true">✦</span>
+      <span class="spark s3" aria-hidden="true">✦</span>
+      <div class="bubble" id="bubble" aria-live="polite">mrrp? give it some water!</div>
+
+      <svg id="stage" viewBox="0 0 360 272" role="group" aria-label="Coco the cat sitting on a printer next to a plant that grows as you water it">
+        <defs>
+          <clipPath id="slotClip"><rect x="0" y="222" width="360" height="50"/></clipPath>
+          <clipPath id="bodyClip"><path d="M46 176 C42 142 66 122 100 122 C134 122 158 142 154 176 Z"/></clipPath>
+          <clipPath id="headClip"><path d="M58 150 C58 124 78 112 100 112 C122 112 142 124 142 150 C142 172 124 184 100 184 C76 184 58 172 58 150 Z"/></clipPath>
+        </defs>
+
+        <rect class="floor" x="0" y="232" width="360" height="40"/>
+        <ellipse class="floor-shadow" cx="102" cy="238" rx="84" ry="5"/>
+
+        <!-- printer -->
+        <rect class="prn" x="26" y="172" width="152" height="64" rx="10"/>
+        <path class="prn-top" d="M26 182 Q26 172 36 172 H168 Q178 172 178 182 V192 H26 Z"/>
+        <rect class="screen" x="33" y="178" width="17" height="12" rx="3"/>
+        <rect class="prn-dark" x="56" y="219" width="104" height="5" rx="2.5"/>
+        <circle class="prn-dark" cx="166" cy="226" r="3"/>
+
+        <!-- Coco -->
+        <g id="coco" class="coco" role="button" tabindex="0" aria-label="Pet Coco the cat">
+          <g class="tail">
+            <path class="tail-o" d="M54 170 C22 170 14 130 36 108"/>
+            <path class="tail-b" d="M26 128 C24 118 28 112 36 108"/>
+          </g>
+
+          <g class="body">
+            <g clip-path="url(#bodyClip)">
+              <rect class="c-orange" x="40" y="116" width="120" height="64"/>
+              <ellipse class="c-black" cx="68" cy="138" rx="30" ry="24"/>
+              <ellipse class="c-black" cx="146" cy="158" rx="14" ry="18"/>
+              <ellipse class="c-white" cx="112" cy="176" rx="26" ry="10"/>
+            </g>
+            <g class="c-white">
+              <ellipse cx="54" cy="176" rx="9" ry="6.5"/>
+              <ellipse cx="68" cy="177" rx="9" ry="6.5"/>
+              <ellipse cx="82" cy="177" rx="9" ry="6.5"/>
+              <ellipse cx="118" cy="177" rx="9" ry="6.5"/>
+              <ellipse cx="132" cy="177" rx="9" ry="6.5"/>
+              <ellipse cx="146" cy="176" rx="9" ry="6.5"/>
+            </g>
+          </g>
+
+          <g class="paw">
+            <path class="c-white" d="M128 174 C128 166 146 166 146 174 L146 196 C146 205 128 205 128 196 Z"/>
+            <path class="paw-toe" d="M134 192 V199 M140 192 V199"/>
+          </g>
+
+          <g class="head">
+            <g class="ear-l">
+              <path class="ear-shape" d="M62 130 L64 98 L90 116 Z"/>
+              <path class="ear-in" d="M68 118 L69 106 L80 114 Z"/>
+            </g>
+            <g class="ear-r">
+              <path class="ear-shape" d="M138 130 L136 98 L110 116 Z"/>
+              <path class="ear-in" d="M132 118 L131 106 L120 114 Z"/>
+            </g>
+            <path class="c-white" d="M60 156 L50 163 L62 170 Z"/>
+            <path class="c-white" d="M140 156 L150 163 L138 170 Z"/>
+            <path class="c-white" d="M58 150 C58 124 78 112 100 112 C122 112 142 124 142 150 C142 172 124 184 100 184 C76 184 58 172 58 150 Z"/>
+            <g clip-path="url(#headClip)">
+              <ellipse class="c-black" cx="70" cy="120" rx="30" ry="26"/>
+              <ellipse class="c-orange" cx="126" cy="122" rx="28" ry="24"/>
+              <path class="c-orange" d="M90 108 Q96 136 95 154 L105 154 Q104 136 110 108 Z"/>
+            </g>
+            <ellipse class="c-white" cx="100" cy="166" rx="27" ry="18"/>
+            <path class="stripe" d="M95 117 v8 M100 115 v10 M105 117 v8"/>
+            <ellipse class="cheek-blush" cx="76" cy="164" rx="7" ry="4.5"/>
+            <ellipse class="cheek-blush" cx="124" cy="164" rx="7" ry="4.5"/>
+
+            <g class="eyes">
+              <ellipse class="iris" cx="82" cy="148" rx="9.5" ry="10.5"/>
+              <ellipse class="iris" cx="118" cy="148" rx="9.5" ry="10.5"/>
+              <g id="pupils">
+                <ellipse class="pupil-e" cx="82" cy="149" rx="4.4" ry="7"/>
+                <ellipse class="pupil-e" cx="118" cy="149" rx="4.4" ry="7"/>
+                <circle class="glint" cx="84.6" cy="144" r="2.2"/>
+                <circle class="glint" cx="120.6" cy="144" r="2.2"/>
+              </g>
+            </g>
+            <g class="happy-eyes">
+              <path d="M73 150 Q82 140 91 150"/>
+              <path d="M109 150 Q118 140 127 150"/>
+            </g>
+
+            <path class="nose" d="M96 157.5 H104 L100 162.5 Z"/>
+            <path class="mouth" d="M100 163 V166 M100 166 Q95 171 90 167 M100 166 Q105 171 110 167"/>
+            <path class="whisk" d="M70 160 L46 155 M70 165 L45 168 M130 160 L154 155 M130 165 L155 168"/>
+          </g>
+        </g>
+
+        <!-- certificate -->
+        <g clip-path="url(#slotClip)">
+          <g transform="translate(76,204) rotate(-2)">
+            <g id="paper" class="paper">
+              <rect class="paper-sheet" x="0" y="0" width="64" height="64" rx="3"/>
+              <path class="paper-line" d="M12 26 H52 M18 32 H46"/>
+              <g transform="translate(32,49)">
+                <circle class="seal" r="9"/>
+                <path class="seal-heart" d="M0 4.5 C-8 -1 -5 -7 0 -3 C5 -7 8 -1 0 4.5 Z"/>
+              </g>
+            </g>
+          </g>
+        </g>
+
+        <!-- plant -->
+        <g transform="translate(175,16)">
+          <g id="plantg">
+            <g class="sway">
+              <path id="stem" class="stem-line" d="M100 174 L100 62" pathLength="100" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100"/>
+
+              <g transform="translate(100,150) scale(-1,1)"><g class="grow" data-at="1">
+                <g transform="rotate(-18)"><path class="leaf" d="M0 0 C8 -16 30 -18 42 -6 C32 8 10 12 0 0 Z"/><path class="vein" d="M4 -1 C16 -6 26 -7 34 -5"/></g>
+              </g></g>
+
+              <g transform="translate(100,128)"><g class="grow" data-at="2">
+                <g transform="rotate(-18)"><path class="leaf" d="M0 0 C8 -16 30 -18 42 -6 C32 8 10 12 0 0 Z"/><path class="vein" d="M4 -1 C16 -6 26 -7 34 -5"/></g>
+              </g></g>
+
+              <g transform="translate(100,108) scale(-1,1)"><g class="grow" data-at="3">
+                <g transform="rotate(-22)"><path class="leaf" d="M0 0 C8 -15 28 -17 38 -5 C29 7 9 11 0 0 Z"/><path class="vein" d="M4 -1 C15 -6 24 -7 31 -5"/></g>
+              </g></g>
+
+              <g transform="translate(100,90)"><g class="grow" data-at="4">
+                <g transform="rotate(-22)"><path class="leaf" d="M0 0 C8 -15 28 -17 38 -5 C29 7 9 11 0 0 Z"/><path class="vein" d="M4 -1 C15 -6 24 -7 31 -5"/></g>
+              </g></g>
+
+              <g transform="translate(100,68)"><g class="grow" data-at="5" data-only="1">
+                <circle class="bud" cx="0" cy="0" r="7.5"/>
+              </g></g>
+
+              <g transform="translate(100,62)"><g class="bloom" data-at="6">
+                <ellipse class="petal" cx="0" cy="-13" rx="7.5" ry="11"/>
+                <ellipse class="petal" cx="0" cy="-13" rx="7.5" ry="11" transform="rotate(60)"/>
+                <ellipse class="petal" cx="0" cy="-13" rx="7.5" ry="11" transform="rotate(120)"/>
+                <ellipse class="petal" cx="0" cy="-13" rx="7.5" ry="11" transform="rotate(180)"/>
+                <ellipse class="petal" cx="0" cy="-13" rx="7.5" ry="11" transform="rotate(240)"/>
+                <ellipse class="petal" cx="0" cy="-13" rx="7.5" ry="11" transform="rotate(300)"/>
+                <circle class="core" cx="0" cy="0" r="8"/>
+              </g></g>
+            </g>
+
+            <path class="pot-body" d="M70 178 H130 L123 214 Q122 220 116 220 H84 Q78 220 77 214 Z"/>
+            <rect class="pot-rim" x="62" y="168" width="76" height="16" rx="8"/>
+            <circle class="face" cx="90" cy="197" r="2.8"/>
+            <circle class="face" cx="110" cy="197" r="2.8"/>
+            <path class="pot-mouth" d="M95 203 Q100 208.5 105 203"/>
+            <ellipse class="pot-cheek" cx="83" cy="203" rx="4.5" ry="2.8"/>
+            <ellipse class="pot-cheek" cx="117" cy="203" rx="4.5" ry="2.8"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <div class="body">
+      <p class="eyebrow">For Aleshah</p>
+      <h1>I'm proud of you.</h1>
+      <div class="msg" id="msg" aria-live="polite">
+        <p class="msg-main" id="msgMain"></p>
+        <p class="msg-sub" id="msgSub"></p>
+      </div>
+      <div class="progress">
+        <div class="dots" id="dots" aria-hidden="true"></div>
+        <span class="count" id="count">0 of 6</span>
+      </div>
+      <button class="water" id="water" type="button">Water the plant</button>
+      <p class="note" id="note">Psst. Tap Coco to pet her.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var reasons = [
+    "You keep going, even on the days it feels like too much.",
+    "You've come further than you give yourself credit for.",
+    "You care about people in a way that makes things better.",
+    "You try again when things don't go your way.",
+    "You do hard things quietly, and they still count.",
+    "I'm so proud of you, Aleshah. Today and every day."
+  ];
+  var intro = "Water the little plant and see what grows.";
+  var certLine = "Coco's printer made you an official certificate.";
+  var cocoLines = [
+    "mrrp? give it some water!",
+    "mrrp!",
+    "look, it's growing!",
+    "keep going, keep going",
+    "almost there... mrrp",
+    "a bud! a bud!",
+    "I'm proud of you too. mrrp!"
+  ];
+  var petLines = ["prrrr...", "mrrp!", "*loud purring*", "more pets, please", "you're very nice"];
+  var stemLens = [0, 24, 44, 62, 78, 92, 100];
+  var total = reasons.length;
+  var stage = 0, pets = 0, lockUntil = 0, petTimer = null, happyTimer = null;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var scene = $("scene"), stem = $("stem"), plantg = $("plantg"), coco = $("coco");
+  var pupils = $("pupils"), bubble = $("bubble"), msg = $("msg");
+  var msgMain = $("msgMain"), msgSub = $("msgSub"), count = $("count");
+  var btn = $("water"), dots = $("dots"), note = $("note"), paper = $("paper");
+  var head = coco.querySelector(".head");
+  var parts = Array.prototype.slice.call(document.querySelectorAll("[data-at]"));
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  for (var i = 0; i < total; i++) {
+    var d = document.createElement("span");
+    d.className = "dot";
+    dots.appendChild(d);
+  }
+  var dotEls = dots.children;
+
+  function restart(el, cls) {
+    if (reduce) return;
+    el.classList.remove(cls);
+    void el.getBoundingClientRect();
+    el.classList.add(cls);
+  }
+
+  function say(text) {
+    bubble.textContent = text;
+    restart(bubble, "pop");
+  }
+
+  function setPupil(x, y) {
+    pupils.setAttribute("transform", "translate(" + x.toFixed(2) + "," + y.toFixed(2) + ")");
+  }
+
+  function lookAt(px, py) {
+    var r = head.getBoundingClientRect();
+    var ox = r.left + r.width / 2, oy = r.top + r.height * 0.55;
+    var dx = px - ox, dy = py - oy;
+    var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+    var k = Math.min(1, dist / 160);
+    setPupil(dx / dist * 3.4 * k, dy / dist * 2.8 * k);
+  }
+
+  if (!reduce) {
+    var track = function (e) {
+      if (performance.now() < lockUntil) return;
+      lookAt(e.clientX, e.clientY);
+    };
+    document.addEventListener("pointermove", track);
+    document.addEventListener("pointerdown", track);
+  }
+
+  function hearts(n, leftMin, leftMax, bottom) {
+    if (reduce) return;
+    for (var k = 0; k < n; k++) {
+      var h = document.createElement("span");
+      h.className = "heart";
+      h.textContent = "♥";
+      h.style.left = (leftMin + Math.random() * (leftMax - leftMin)) + "%";
+      h.style.bottom = bottom + "%";
+      h.style.fontSize = (14 + Math.random() * 14) + "px";
+      h.style.setProperty("--dx", (Math.random() * 90 - 45) + "px");
+      h.style.setProperty("--dur", (1.4 + Math.random() * 0.9) + "s");
+      h.style.animationDelay = (k * 70) + "ms";
+      h.addEventListener("animationend", function (e) { e.target.remove(); });
+      scene.appendChild(h);
+    }
+  }
+
+  function renderNote() {
+    note.textContent = pets === 0
+      ? "Psst. Tap Coco to pet her."
+      : "Coco has been petted " + pets + (pets === 1 ? " time." : " times.");
+  }
+
+  function render(animate) {
+    stem.style.strokeDashoffset = String(100 - stemLens[stage]);
+    parts.forEach(function (el) {
+      var at = +el.getAttribute("data-at");
+      var on = el.getAttribute("data-only") ? stage === at : stage >= at;
+      el.classList.toggle("on", on);
+    });
+    for (var j = 0; j < total; j++) dotEls[j].classList.toggle("on", j < stage);
+    count.textContent = stage + " of " + total;
+    msgMain.textContent = stage === 0 ? intro : reasons[stage - 1];
+    msgSub.textContent = stage === total ? certLine : "";
+    btn.textContent = stage === 0 ? "Water the plant" : (stage === total ? "Start over" : "Water again");
+    paper.classList.toggle("out", stage === total);
+    if (animate) {
+      say(cocoLines[stage]);
+      restart(msg, "pop");
+    }
+  }
+
+  function setHappy(ms) {
+    coco.classList.add("happy");
+    clearTimeout(happyTimer);
+    happyTimer = setTimeout(function () { coco.classList.remove("happy"); }, ms);
+  }
+
+  btn.addEventListener("click", function () {
+    if (stage >= total) {
+      stage = 0;
+      coco.classList.remove("happy");
+    } else {
+      stage += 1;
+      restart(plantg, "hop");
+      restart(coco, "hop");
+      lockUntil = performance.now() + 1400;
+      setPupil(3.4, -1.6);
+      hearts(stage === total ? 16 : 6, 66, 84, 48);
+      if (stage === total) {
+        setHappy(4200);
+        hearts(8, 14, 38, 46);
+      }
+    }
+    render(true);
+  });
+
+  function pet() {
+    pets += 1;
+    coco.classList.add("purr");
+    setHappy(1700);
+    clearTimeout(petTimer);
+    petTimer = setTimeout(function () { coco.classList.remove("purr"); }, 1700);
+    say(petLines[(pets - 1) % petLines.length]);
+    hearts(3, 14, 38, 46);
+    renderNote();
+  }
+
+  coco.addEventListener("click", pet);
+  coco.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      pet();
+    }
+  });
+
+  render(false);
+})();
+</script>
+</body>
+</html>
